@@ -4,6 +4,7 @@ from github import Github
 #from github import InputGitTreeElement
 import json
 import base64
+from django.views.decorators.csrf import csrf_exempt
 
 
 def git_get(request):
@@ -20,28 +21,48 @@ def git_get(request):
 	print(content.text)
 	return JsonResponse({'file_content': content.text})
 
+@csrf_exempt
 def git_commit(request):
-	username = request.GET.get('username')
-	password = request.GET.get('password')
-	token = Github(username, password)
+	username = 'mudit-mhjn'
+	password = '123drakefan'
+	creden = ('mudit-mhjn', '123drakefan')
+	#g = Github(username, password)
+	#user = g.get_user('mudit-mhjn')
+	
+	#repo = user.get_repo('gitmod')
 
-	repo_name = request.GET.get('repository')
-	file_address = request.GET.get('address')
-	file_name = request.GET.get('file_name')
-	repo = token.get_repo('{}/{}'.format(username, repo_name))
-	branch_name = request.GET.get('branch', 'codeio')
-	updated_content = request.GET.get('file_content')
-	commit_message = request.GET.get('commit_msg')
+	#contents = repo.get_contents('/test.txt')
+	#print(contents.decoded_content)
+	#print(dir(repo))
+	#commit = repo.update_file('mudit-mhjn/gitmod/test.txt', 'commit_message', 'this is updated content', contents.sha)
+	return HttpResponse('200')
 
-	if file_address == None:
-		contents = repo.get_contents(file_name)
-	else:
-		contents = repo.get_contents('{}/{}'.format(address, file_name))
-	print(contents.path, contents.sha)
-	print(contents)
-	commits = repo.update_file(contents.path, commit_message, updated_content, contents.sha, branch=branch_name)
-	return JsonResponse(commits)
 
+
+"""
+@csrf_exempt
+def git_commit(request):
+	if request.method=='PUT':
+		username = request.PUT['username']
+		password = request.PUT['password']
+		token = Github(username, password)
+
+		repo_name = request.GET.get('repository')
+		file_address = request.GET.get('address')
+		file_name = request.GET.get('file_name')
+		repo = token.get_repo('{}/{}'.format(username, repo_name))
+		branch_name = request.GET.get('branch', 'codeio')
+		updated_content = request.GET.get('file_content')
+		commit_message = request.GET.get('commit_msg')	
+
+		if file_address == None:
+			contents = repo.get_contents(file_name)
+		else:
+			contents = repo.get_contents('{}/{}'.format(address, file_name))
+		commits = repo.update_file(path=contents.path, message=commit_message, content=updated_content, sha=contents.sha, branch=branch_name)
+		return jsonResponse(commits)
+
+"""
 
 """
 def git_commit(requesst):
