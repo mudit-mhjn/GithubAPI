@@ -23,8 +23,8 @@ def git_get(request):
 
 @csrf_exempt
 def git_commit(request):
-	username = 'mudit-mhjn'
-	password = '123drakefan'
+	username = #username here
+	password = #password here
 	creden = ('mudit-mhjn', '123drakefan')
 	#g = Github(username, password)
 	#user = g.get_user('mudit-mhjn')
