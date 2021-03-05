@@ -25,7 +25,7 @@ def git_get(request):
 def git_commit(request):
 	username = #username here
 	password = #password here
-	creden = ('mudit-mhjn', '123drakefan')
+	creden = ('mudit-mhjn', #password-here)
 	#g = Github(username, password)
 	#user = g.get_user('mudit-mhjn')
 	
